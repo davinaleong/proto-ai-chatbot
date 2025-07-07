@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express"
 import cors from "cors"
 import dotenv from "dotenv"
-import { Configuration, OpenAIApi, ChatCompletionRequestMessage } from "openai"
+import OpenAI from "openai"
 
 dotenv.config()
 
@@ -9,21 +9,13 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const apiKey = process.env.OPENAI_API_KEY
-
-if (!apiKey) {
-  throw new Error("Missing OPENAI_API_KEY in environment variables.")
-}
-
-const configuration = new Configuration({
-  apiKey,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 })
-
-const openai = new OpenAIApi(configuration)
 
 interface ChatRequestBody {
   message: string
-  history?: ChatCompletionRequestMessage[]
+  history?: OpenAI.Chat.ChatCompletionMessageParam[]
 }
 
 app.post(
@@ -32,12 +24,12 @@ app.post(
     const { message, history = [] } = req.body
 
     try {
-      const response = await openai.createChatCompletion({
+      const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [...history, { role: "user", content: message }],
       })
 
-      const reply = response.data.choices[0]?.message?.content || "No response"
+      const reply = response.choices[0]?.message?.content || "No response"
       res.json({ reply })
     } catch (err) {
       console.error(err)
