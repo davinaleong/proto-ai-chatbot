@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon",
-    "start": "node src/index.js"
+    "dev": "nodemon src/index.js",
+    "mock": "nodemon src/mock.js",
+    "start": "node src/index.js",
+    "start:mock": "node src/mock.js",
+    "lint": "eslint src --ext .js",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,10 +24,15 @@
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
-    "nodemon": "^3.1.0"
+    "jest": "^30.0.4",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "type": "commonjs"
+  "type": "module"
 }
