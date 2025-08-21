@@ -1,12 +1,12 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon src/index.js",
     "mock": "nodemon src/mock.js",
-    "start": "cross-env NODE_ENV=production node src/server.js",
+    "start": "cross-env NODE_ENV=production node src/index.js",
     "serve": "netlify dev",
     "build": "echo \"No build step for backend; functions are bundled by Netlify\"",
     "deploy": "netlify deploy --build --prod",
