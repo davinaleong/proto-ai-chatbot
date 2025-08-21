@@ -1,12 +1,15 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/server.js",
     "mock": "nodemon src/mock.js",
-    "start": "node src/index.js",
-    "start:mock": "node src/mock.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
+    "serve": "netlify dev",
+    "build": "echo \"No build step for backend; functions are bundled by Netlify\"",
+    "deploy": "netlify deploy --build --prod",
     "lint": "eslint src --ext .js",
     "test": "jest"
   },
@@ -14,7 +17,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.19.2",
-    "openai": "^4.50.0"
+    "openai": "^4.50.0",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",
@@ -26,13 +30,15 @@
     "eslint-plugin-import": "^2.29.1",
     "jest": "^30.0.4",
     "nodemon": "^3.1.0",
-    "supertest": "^7.1.1"
+    "supertest": "^7.1.1",
+    "cross-env": "^7.0.3",
+    "netlify-cli": "^17.0.0"
   },
   "jest": {
     "testEnvironment": "node"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "type": "module"
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
 }
